@@ -44,15 +44,20 @@ jobs:
           echo jenkins_nginx_cert_email=\"${{ secrets.JENKINS_NGINX_CERT_EMAIL }}\" >> vars.pkrvars.hcl
           echo jenkins_admin_username=\"${{ secrets.JENKINS_ADMIN_USERNAME }}\" >> vars.pkrvars.hcl
           echo jenkins_admin_password=\"${{ secrets.JENKINS_ADMIN_PASSWORD }}\" >> vars.pkrvars.hcl
+        working-directory: packer
 
       - name: Packer Init
         run: "packer init jenkins.pkr.hcl"
+        working-directory: packer
 
       - name: Packer Format
         run: "packer fmt ."
+        working-directory: packer
 
       - name: Packer Validate
         run: "packer validate --var-file=vars.pkrvars.hcl jenkins.pkr.hcl"
+        working-directory: packer
 
       - name: Packer Build
         run: "packer build --var-file=vars.pkrvars.hcl jenkins.pkr.hcl"
+        working-directory: packer
