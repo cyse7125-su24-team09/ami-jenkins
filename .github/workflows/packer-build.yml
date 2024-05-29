@@ -1,12 +1,12 @@
-name: Packer Validate - Jenkins AMI
+name: Packer Build - Jenkins AMI
 
 on:
-  pull_request:
+  push:
     branches: ["main"]
 
 jobs:
-  validate:
-    name: 'Packer Validate'
+  build:
+    name: 'Packer Build'
     runs-on: ubuntu-latest
 
     defaults:
@@ -17,13 +17,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Setup Packer
         uses: hashicorp/setup-packer@main
         with:
           version: 'latest'
-
-      - name: Packer Workspace
-        run: cd packer
 
       - name: Packer Configuration
         run: |
@@ -40,12 +44,15 @@ jobs:
           echo jenkins_nginx_cert_email=\"${{ secrets.JENKINS_NGINX_CERT_EMAIL }}\" >> vars.pkrvars.hcl
           echo jenkins_admin_username=\"${{ secrets.JENKINS_ADMIN_USERNAME }}\" >> vars.pkrvars.hcl
           echo jenkins_admin_password=\"${{ secrets.JENKINS_ADMIN_PASSWORD }}\" >> vars.pkrvars.hcl
- 
+
       - name: Packer Init
-        run: "packer init ."
+        run: "packer init jenkins.pkr.hcl"
 
       - name: Packer Format
-        run: "packer fmt -check jenkins.pkr.hcl"
+        run: "packer fmt ."
 
       - name: Packer Validate
         run: "packer validate --var-file=vars.pkrvars.hcl jenkins.pkr.hcl"
+
+      - name: Packer Build
+        run: "packer build --var-file=vars.pkrvars.hcl jenkins.pkr.hcl"
