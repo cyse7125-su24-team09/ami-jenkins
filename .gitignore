@@ -1,0 +1,31 @@
+.DS_Store
+
+### Packer specific files ###
+packer_cache/
+packer_cache_*/
+*.pkrvars.hcl
+
+### IDE specific files ###
+.idea
+.vscode/
+*.iws
+*.iml
+*.ipr
+
+### Logs ###
+logs/
+*.log
+*.log.*
+
+### Artifacts ###
+*.war
+*.zip
+*.tar.gz
+*.tar
+
+### Sensitive credentials ###
+*.json
+*.pem
+*.key
+*.crt
+*.pfx
