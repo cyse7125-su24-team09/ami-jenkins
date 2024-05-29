@@ -1,11 +1,9 @@
 #!/bin/bash
 
-DOMAIN="$JENKINS_DOMAIN"
-EMAIL="$JENKINS_NGINX_CERT_EMAIL"
 CERT_PATH="/etc/letsencrypt/live/$JENKINS_DOMAIN/fullchain.pem"
 
 request_certificate() {
-    sudo certbot --nginx --staging --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
+    sudo certbot --nginx --staging --non-interactive --agree-tos --email $JENKINS_NGINX_CERT_EMAIL -d $JENKINS_DOMAIN
     sudo systemctl restart nginx
 }
 
