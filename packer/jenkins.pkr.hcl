@@ -89,8 +89,8 @@ build {
   sources = ["source.amazon-ebs.jenkins"]
 
   provisioner "file" {
-    source      = "../scripts/jenkins.conf"
-    destination = "/tmp/jenkins.conf"
+    source      = "../scripts/nginx-jenkins.conf"
+    destination = "/tmp/nginx-jenkins.conf"
   }
 
   provisioner "file" {
@@ -106,6 +106,11 @@ build {
   provisioner "file" {
     source      = "../scripts/request-cert.sh"
     destination = "/tmp/request-cert.sh"
+  }
+
+  provisioner "file" {
+    source      = "../scripts/request-cert.service"
+    destination = "/tmp/request-cert.service"
   }
 
   provisioner "shell" {

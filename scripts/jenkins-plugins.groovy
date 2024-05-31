@@ -1,23 +1,41 @@
-import jenkins.model.*
+import jenkins.*
+import hudson.*
+import com.cloudbees.plugins.credentials.*
+import com.cloudbees.plugins.credentials.common.*
+import com.cloudbees.plugins.credentials.domains.*
+import com.cloudbees.jenkins.plugins.sshcredentials.impl.*
+import hudson.plugins.sshslaves.*;
 import hudson.model.*
+import jenkins.model.*
+import hudson.security.*
 
 final List<String> REQUIRED_PLUGINS = [
+    "git",
+    "github",
+    "github-api",
     "workflow-aggregator",
+    "build-timeout",
+    "credentials-binding",
+    "cloudbees-folder",
+    "dark-theme",
+    "github-branch-source",
+    "pipeline-github-lib",
+    "pipeline-graph-view",
+    "timestamper",
     "ws-cleanup"
 ]
 
 def instance = Jenkins.getInstance()
-def installedPlugins = instance.pluginManager.plugins.collect { it.shortName }
-def missingPlugins = REQUIRED_PLUGINS - installedPlugins
 
-if (!missingPlugins.isEmpty()) {
-    missingPlugins.collect { plugin ->
-        instance.updateCenter.getPlugin(plugin).deploy()
-    }.each { 
-        it.get()
-    }
+if (instance.pluginManager.plugins.collect {
+  it.shortName
+}.intersect(REQUIRED_PLUGINS).size() != REQUIRED_PLUGINS.size()) {
+  REQUIRED_PLUGINS.collect {
+    instance.updateCenter.getPlugin(it).deploy()
+  }.each {
+    it.get()
+  }
+  instance.restart()
+}
 
-    instance.save()
-} 
-
-println "All required plugins are installed"
+println "Jenkins plugins installed successfully"

@@ -1,0 +1,13 @@
+[Unit]
+Description=Request SSL Certificate for Jenkins Domain
+After=network.target nginx.service
+ConditionPathExists=/etc/environment
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStart=/usr/local/bin/request-cert.sh
+ExecReload=/usr/local/bin/request-cert.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
