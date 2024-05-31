@@ -19,6 +19,7 @@ sudo mv /tmp/jenkins-security.groovy /var/lib/jenkins/init.groovy.d/jenkins-secu
 sudo sed -i "s/JENKINS_ADMIN_USERNAME/$JENKINS_ADMIN_USERNAME/g" /var/lib/jenkins/init.groovy.d/jenkins-security.groovy
 sudo sed -i "s/JENKINS_ADMIN_PASSWORD/$JENKINS_ADMIN_PASSWORD/g" /var/lib/jenkins/init.groovy.d/jenkins-security.groovy
 sudo chown -R jenkins:jenkins /var/lib/jenkins/init.groovy.d
+sudo sed -i '/^JAVA_ARGS=/ s/"$/ -Djenkins.install.runSetupWizard=false"/' /etc/default/jenkins
 
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
