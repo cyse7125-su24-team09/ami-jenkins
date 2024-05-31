@@ -12,10 +12,13 @@ sudo apt-get update
 sudo apt-get install -y openjdk-17-jre
 sudo apt-get install -y jenkins
 
-# Initial setup for jenkins security and plugins
+# Setup for jenkins security and plugins
 sudo mkdir -p /var/lib/jenkins/init.groovy.d
-sudo mv /tmp/jenkins-security.groovy /var/lib/jenkins/init.groovy.d/jenkins-security.groovy
 sudo mv /tmp/jenkins-plugins.groovy /var/lib/jenkins/init.groovy.d/jenkins-plugins.groovy
+sudo mv /tmp/jenkins-security.groovy /var/lib/jenkins/init.groovy.d/jenkins-security.groovy
+sudo sed -i "s/JENKINS_ADMIN_USERNAME/$JENKINS_ADMIN_USERNAME/g" /var/lib/jenkins/init.groovy.d/jenkins-security.groovy
+sudo sed -i "s/JENKINS_ADMIN_PASSWORD/$JENKINS_ADMIN_PASSWORD/g" /var/lib/jenkins/init.groovy.d/jenkins-security.groovy
+sudo chown -R jenkins:jenkins /var/lib/jenkins/init.groovy.d
 
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
