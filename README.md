@@ -1,4 +1,4 @@
-# Jenkins AMI Creation with Packer
+# Jenkins AMI Creation with Packer 
  
 This repository contains the Packer template and necessary scripts to create a Jenkins Amazon Machine Image (AMI) on AWS. The Packer configuration is designed to automate the setup of a Jenkins server with necessary configurations and plugins.
  
