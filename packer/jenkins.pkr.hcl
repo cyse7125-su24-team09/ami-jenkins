@@ -22,11 +22,6 @@ variable "aws_region" {
   description = "AWS region"
 }
 
-variable "source_ami" {
-  type        = string
-  description = "ID of the Source AMI to use for building the AMI"
-}
-
 variable "instance_type" {
   type        = string
   description = "EC2 instance type to use while building the AMI"
