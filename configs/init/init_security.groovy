@@ -1,5 +1,3 @@
-#!groovy
-
 import jenkins.model.*
 import jenkins.install.*;
 import hudson.security.*
@@ -7,10 +5,12 @@ import hudson.util.*;
 import hudson.security.csrf.DefaultCrumbIssuer;
 
 def instance = Jenkins.getInstance()
+def adminUsername = System.getenv("JENKINS_USERNAME")
+def adminPassword = System.getenv("JENKINS_PASSWORD")
 
 // Create an initial admin user
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
-hudsonRealm.createAccount('JENKINS_ADMIN_USERNAME', 'JENKINS_ADMIN_PASSWORD')
+hudsonRealm.createAccount(adminUsername, adminPassword)
 instance.setSecurityRealm(hudsonRealm)
 
 def strategy = new FullControlOnceLoggedInAuthorizationStrategy()

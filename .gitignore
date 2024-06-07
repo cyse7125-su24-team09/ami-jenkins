@@ -4,6 +4,8 @@
 packer_cache/
 packer_cache_*/
 *.pkrvars.hcl
+manifest.json
+manifest.json.lock
 
 ### IDE specific files ###
 .idea
@@ -22,10 +24,11 @@ logs/
 *.zip
 *.tar.gz
 *.tar
+*.tgz
 
 ### Sensitive credentials ###
-*.json
 *.pem
 *.key
 *.crt
 *.pfx
+*.env

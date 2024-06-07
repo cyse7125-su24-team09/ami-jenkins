@@ -16,18 +16,12 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 sudo systemctl status nginx
 
-NGINX_SETUP=$?
-if [ $NGINX_SETUP -eq 0 ]; then
-  echo "Nginx setup successfully"
-else
-  echo "Nginx setup failed"
-fi
-
 # Configure a startup service to request certificate for nginx
 sudo mv /tmp/request-cert.sh /usr/local/bin/request-cert.sh
 sudo chmod +x /usr/local/bin/request-cert.sh
 sudo mv /tmp/request-cert.service /etc/systemd/system/request-cert.service
 
+# Set environment variables for nginx
 sudo sh -c "echo 'JENKINS_DOMAIN=${JENKINS_DOMAIN}' >> /etc/environment"
 sudo sh -c "echo 'JENKINS_NGINX_CERT_EMAIL=${JENKINS_NGINX_CERT_EMAIL}' >> /etc/environment"
 

@@ -29,6 +29,19 @@ jobs:
         with:
           version: 'latest'
 
+      - name: Jenkins Configuration
+        run: |
+          touch configs/jenkins.env
+          echo JENKINS_URL=https://${{ secrets.JENKINS_DOMAIN }} >> configs/jenkins.env
+          echo JENKINS_USERNAME=${{ secrets.JENKINS_USERNAME }} >> configs/jenkins.env
+          echo JENKINS_PASSWORD=${{ secrets.JENKINS_PASSWORD }} >> configs/jenkins.env
+          echo DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} >> configs/jenkins.env
+          echo DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }} >> configs/jenkins.env
+          echo GITHUB_APP_ID=${{ secrets.JENKINS_GITHUB_APP_ID }} >> configs/jenkins.env
+          echo GITHUB_APP_PRIVATE_KEY='${{ secrets.JENKINS_GITHUB_APP_PRIVATE_KEY }}' >> configs/jenkins.env
+          
+          tar -czvf configs.tgz -C configs .
+
       - name: Packer Configuration
         run: |
           touch vars.pkrvars.hcl
