@@ -57,16 +57,6 @@ variable "jenkins_nginx_cert_email" {
   description = "Maintainer's email address for jenkins nginx certificates"
 }
 
-variable "jenkins_admin_username" {
-  type        = string
-  description = "Username for the jenkins server admin"
-}
-
-variable "jenkins_admin_password" {
-  type        = string
-  description = "Password for the jenkins server admin"
-}
-
 source "amazon-ebs" "jenkins" {
   profile           = var.aws_profile
   region            = var.aws_region
