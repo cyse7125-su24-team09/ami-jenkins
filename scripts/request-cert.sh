@@ -3,7 +3,7 @@
 CERT_PATH="/etc/letsencrypt/live/$JENKINS_DOMAIN/fullchain.pem"
 
 request_certificate() {
-    sudo certbot --nginx --staging --non-interactive --agree-tos --email $JENKINS_NGINX_CERT_EMAIL -d $JENKINS_DOMAIN
+    sudo certbot --nginx --non-interactive --agree-tos --email $JENKINS_NGINX_CERT_EMAIL -d $JENKINS_DOMAIN
     sudo systemctl restart nginx
 }
 
