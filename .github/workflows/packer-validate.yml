@@ -31,7 +31,7 @@ jobs:
           echo DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} >> configs/jenkins.env
           echo DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }} >> configs/jenkins.env
           echo GITHUB_APP_ID=${{ secrets.JENKINS_GITHUB_APP_ID }} >> configs/jenkins.env
-          echo GITHUB_APP_PRIVATE_KEY='${{ secrets.JENKINS_GITHUB_APP_PRIVATE_KEY }}' >> configs/jenkins.env
+          echo "GITHUB_APP_PRIVATE_KEY='${{ secrets.JENKINS_GITHUB_APP_PRIVATE_KEY }}'" >> configs/jenkins.env
           
           tar -czvf configs.tgz -C configs .
 
