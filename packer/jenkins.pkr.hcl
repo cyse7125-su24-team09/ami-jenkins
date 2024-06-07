@@ -89,18 +89,13 @@ build {
   sources = ["source.amazon-ebs.jenkins"]
 
   provisioner "file" {
+    source      = "../configs.tgz"
+    destination = "/tmp/configs.tgz"
+  }
+
+  provisioner "file" {
     source      = "../scripts/nginx-jenkins.conf"
     destination = "/tmp/nginx-jenkins.conf"
-  }
-
-  provisioner "file" {
-    source      = "../scripts/jenkins-security.groovy"
-    destination = "/tmp/jenkins-security.groovy"
-  }
-
-  provisioner "file" {
-    source      = "../scripts/jenkins-plugins.groovy"
-    destination = "/tmp/jenkins-plugins.groovy"
   }
 
   provisioner "file" {
@@ -116,13 +111,12 @@ build {
   provisioner "shell" {
     environment_vars = [
       "JENKINS_DOMAIN=${var.jenkins_domain}",
-      "JENKINS_NGINX_CERT_EMAIL=${var.jenkins_nginx_cert_email}",
-      "JENKINS_ADMIN_USERNAME=${var.jenkins_admin_username}",
-      "JENKINS_ADMIN_PASSWORD=${var.jenkins_admin_password}"
+      "JENKINS_NGINX_CERT_EMAIL=${var.jenkins_nginx_cert_email}"
     ]
     scripts = [
       "../scripts/setup-init.sh",
       "../scripts/setup-jenkins.sh",
+      "../scripts/setup-docker.sh",
       "../scripts/setup-nginx.sh"
     ]
   }

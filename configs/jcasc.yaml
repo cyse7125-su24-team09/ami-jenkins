@@ -1,0 +1,24 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "dockerHub"
+              description: "Docker Hub Credentials"
+              username: ${DOCKER_USERNAME}
+              password: ${DOCKER_PASSWORD}
+          - githubApp:
+              scope: GLOBAL
+              id: "github-app"
+              description: "GitHub App Credentials"
+              appID: ${GITHUB_APP_ID}
+              privateKey: |
+                ${GITHUB_APP_PRIVATE_KEY}
+              
+jobs:
+  - file: ./seedjobs/caddy_server_seed.groovy
+
+unclassified:
+  location:
+    url: ${JENKINS_URL}
