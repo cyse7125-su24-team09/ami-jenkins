@@ -15,9 +15,37 @@ credentials:
               appID: ${GITHUB_APP_ID}
               privateKey: |
                 ${GITHUB_APP_PRIVATE_KEY}
-              
+          - string:
+              scope: GLOBAL
+              id: "github-pat"
+              description: "GitHub Peronal Access Token"
+              secret: ${GITHUB_ACCESS_TOKEN}
+
+tool:
+  go:
+    installations:
+      - name: "go_lang"
+        properties:
+          - installSource:
+              installers:
+                - golangInstaller:
+                    id: "1.22.4"
+
+  nodejs:
+    installations:
+      - name: "node"
+        home: ""
+        properties:
+          - installSource:
+              installers:
+                - nodeJSInstaller:
+                    id: "20.14.0"
+                    npmPackagesRefreshHours: 72
+
 jobs:
   - file: ./seedjobs/caddy_server_seed.groovy
+  - file: ./seedjobs/cve_processor_seed.groovy
+  - file: ./seedjobs/cve_processor_helm_seed.groovy
 
 unclassified:
   location:
