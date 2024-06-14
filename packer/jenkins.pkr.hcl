@@ -107,6 +107,7 @@ build {
       "../scripts/setup-init.sh",
       "../scripts/setup-jenkins.sh",
       "../scripts/setup-docker.sh",
+      "../scripts/setup-helm.sh",
       "../scripts/setup-nginx.sh"
     ]
   }

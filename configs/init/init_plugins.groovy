@@ -28,6 +28,8 @@ final List<String> REQUIRED_PLUGINS = [
     "docker-workflow",
     "docker-java-api",
     "job-dsl",
+    "golang",
+    "nodejs",
     "pipeline-github-lib",
     "pipeline-graph-view",
     "pipeline-stage-view",
