@@ -46,6 +46,7 @@ jobs:
   - file: ./seedjobs/caddy_server_seed.groovy
   - file: ./seedjobs/cve_processor_seed.groovy
   - file: ./seedjobs/cve_processor_helm_seed.groovy
+  - file: ./seedjobs/infra_aws_seed.groovy
 
 unclassified:
   location:
