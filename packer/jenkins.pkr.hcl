@@ -108,7 +108,8 @@ build {
       "../scripts/setup-jenkins.sh",
       "../scripts/setup-docker.sh",
       "../scripts/setup-helm.sh",
-      "../scripts/setup-nginx.sh"
+      "../scripts/setup-nginx.sh",
+      "../scripts/setup-terraform.sh",
     ]
   }
 
