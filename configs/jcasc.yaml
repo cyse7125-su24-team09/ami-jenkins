@@ -49,6 +49,8 @@ jobs:
   - file: ./seedjobs/cve_consumer_helm_seed.groovy
   - file: ./seedjobs/eks_autoscaler_helm_seed.groovy
   - file: ./seedjobs/infra_aws_seed.groovy
+  - file: ./seedjobs/cve_operator_helm.groovy
+  - file: ./seedjobs/cve_operator_seed.groovy
 
 unclassified:
   location:
